@@ -12,6 +12,7 @@ ExternalProject_Add (
     pistache
     PREFIX ${Dota2HeroPicker_INSTALL_PREFIX}
     SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/extern/pistache"
+    BUILD_ALWAYS 1
     CMAKE_CACHE_ARGS
         -DCMAKE_BUILD_TYPE:STRING=Release
         -DPISTACHE_BUILD_EXAMPLES:BOOL=false
@@ -25,6 +26,7 @@ ExternalProject_Add (
     Dota2HeroPickerRest
     PREFIX ${Dota2HeroPicker_INSTALL_PREFIX}
     SOURCE_DIR "${CMAKE_CURRENT_SOURCE_DIR}/restapi"
+    BUILD_ALWAYS 1
     CMAKE_CACHE_ARGS
         "-DCMAKE_BUILD_TYPE:STRING=${CMAKE_BUILD_TYPE}"
         ${Dota2HeroPicker_DEFAULT_ARGS}
