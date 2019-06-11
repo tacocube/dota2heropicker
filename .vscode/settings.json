@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "iosfwd": "cpp"
+    },
+    "cmake.configureOnOpen": true,
+    "cmake.cmakePath": "/usr/local/bin/cmake"
+}

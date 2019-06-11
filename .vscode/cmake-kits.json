@@ -1,0 +1,9 @@
+[
+    {
+        "name": "Project Local Kit",
+        "compilers": {
+            "CC": "/usr/bin/gcc",
+            "CXX": "/usr/bin/g++"
+        }
+    }
+]

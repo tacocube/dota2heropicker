@@ -3,12 +3,18 @@
 	"dockerFile": "Dockerfile",
 
 	"extensions": [
-		"ms-vscode.cpptools"
+		"ms-vscode.cpptools",
+		"twxs.cmake",
+		"vector-of-bool.cmake-tools"
 	],
 
 	"runArgs": [
 		"--cap-add=SYS_PTRACE",
 		"--security-opt",
-		"seccomp=unconfined"
+		"seccomp=unconfined",
+		"-e",
+		"PORT=5000",
+		"-p",
+		"5000:5000"
 	]
 }

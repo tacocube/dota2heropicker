@@ -1,2 +1,7 @@
-.vscode/
 build/
+
+# Visual Studio Code
+.vscode/*
+!.vscode/c_cpp_properties.json
+!.vscode/cmake-kits.json
+!.vscode/settings.json
