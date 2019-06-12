@@ -10,6 +10,7 @@ add_library(steamapi-client-static STATIC $<TARGET_OBJECTS:steamapi-client>)
 
 add_subdirectory(include)
 add_subdirectory(src)
+add_subdirectory(test)
 
 install(
     TARGETS steamapi-client-shared
