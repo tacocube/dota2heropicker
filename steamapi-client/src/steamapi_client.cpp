@@ -1,7 +1,27 @@
 #include <steamapi_client.hpp>
-#include <mutex>
-SteamApiClient::SteamApiClient() {
-    // Initialize curl globally only once.
-    static std::once_flag flag;
-    std::call_once(flag, curl_global_init, CURL_GLOBAL_ALL);
+#include <curl_wrapper.hpp>
+#include <url_encoder.hpp>
+#include <sstream>
+
+SteamApiClient::SteamApiClient() : steamApiHost("https://api.steampowered.com") {
+
+}
+
+rapidjson::Document SteamApiClient::callSteamApi(
+    const std::string &interface,
+    const std::string &method,
+    const std::string &version,
+    const std::map<std::string, std::string> &parameters) {
+
+    CurlWrapper curl;
+    UrlEncoder encoder;
+    std::stringstream url;
+    url << steamApiHost << "/";
+    url << interface << "/";
+    url << method << "/";
+    url << "v" << version << "/";
+    url << "?" << encoder.urlEncodeMap(parameters);
+    curl.setUrl(url.str());
+    
+    return rapidjson::Document();
 }
