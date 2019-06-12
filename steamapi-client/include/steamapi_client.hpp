@@ -1,6 +1,11 @@
 #ifndef STEAMAPI_CLIENT_STEAMAPI_CLIENT_HPP
 #define STEAMAPI_CLIENT_STEAMAPI_CLIENT_HPP
-class SteamApiClient{
+extern "C"{
+    #include <curl/curl.h>
+}
 
+class SteamApiClient{
+public:
+    SteamApiClient();
 };
 #endif // STEAMAPI-CLIENT_STEAMAPI_CLIENT_HPP
