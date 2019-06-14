@@ -3,6 +3,8 @@ Find out about Dota 2 heroes that might suit you but seldom played by you.
 
 ## Dependencies
 - [Pistache](http://pistache.io/) ([github](https://github.com/oktal/pistache))
+- [libcurl](https://curl.haxx.se/libcurl/) ([github](https://github.com/curl/curl))
+- [RapidJSON](http://rapidjson.org/) ([github](https://github.com/Tencent/rapidjson/))
 
 ## How to Build
 To build from source, cmake is required.
