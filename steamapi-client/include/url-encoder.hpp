@@ -1,6 +1,6 @@
 #ifndef STEAMAPI_CLIENT_URL_ENCODER_HPP
 #define STEAMAPI_CLIENT_URL_ENCODER_HPP
-#include <curl_wrapper.hpp>
+#include <curl-wrapper.hpp>
 #include <map>
 #include <string>
 

@@ -4,6 +4,7 @@ extern "C"{
     #include <curl/curl.h>
 }
 #include <rapidjson/document.h>
+#include <steamapi-client/steamapi-templates.hpp>
 #include <string>
 #include <map>
 #include <memory>
@@ -11,6 +12,12 @@ extern "C"{
 class SteamApiClient{
 public:
     SteamApiClient();
+    template<class API>
+    Response<API> get(Request<API> req) {
+        std::map<std::string, std::string> parameters = req.getParameters();
+        rapidjson::Document doc = callSteamApi(interface<API>(), method<API>(), version<API>(), parameters);
+        return Response<API>(doc);
+    }
 private:
     rapidjson::Document callSteamApi(
         const std::string &interface,
@@ -21,4 +28,5 @@ private:
     
     const std::string steamApiHost;
 };
+
 #endif // STEAMAPI-CLIENT_STEAMAPI_CLIENT_HPP

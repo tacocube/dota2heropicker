@@ -1,6 +1,6 @@
-#include <steamapi_client.hpp>
-#include <curl_wrapper.hpp>
-#include <url_encoder.hpp>
+#include <steamapi-client/steamapi-client.hpp>
+#include <curl-wrapper.hpp>
+#include <url-encoder.hpp>
 #include <sstream>
 
 SteamApiClient::SteamApiClient() : steamApiHost("https://api.steampowered.com") {
@@ -22,6 +22,16 @@ rapidjson::Document SteamApiClient::callSteamApi(
     url << "v" << version << "/";
     url << "?" << encoder.urlEncodeMap(parameters);
     curl.setUrl(url.str());
-    
-    return rapidjson::Document();
+
+    std::stringstream in;
+    curl.setWriteFunction([&in](char *ptr, size_t size, size_t nmemb) -> size_t {
+        size_t ret = size*nmemb;
+        std::string s(ptr, ret);
+        in << s;
+        return ret;
+    });
+    curl.perform();
+    rapidjson::Document d;
+    d.Parse(in.str().c_str());
+    return d;
 }

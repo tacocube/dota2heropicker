@@ -1,6 +1,6 @@
 target_sources(steamapi-client
     PRIVATE
-    curl_wrapper.cpp
-    steamapi_client.cpp
-    url_encoder.cpp
+        curl-wrapper.cpp
+        steamapi-client.cpp
+        url-encoder.cpp
 )
