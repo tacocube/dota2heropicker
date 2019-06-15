@@ -1,5 +1,7 @@
 FROM ubuntu:latest
 
+ARG BOOST_VERSION=1.70
+ARG BOOST_BUILD=0
 ARG CMAKE_VERSION=3.14
 ARG CMAKE_BUILD=5
 ARG CURL_VERSION=7.65
@@ -22,6 +24,15 @@ RUN wget "https://github.com/Kitware/CMake/releases/download/v3.14.5/cmake-$CMAK
         -O cmake.tar.gz
 RUN tar xzf cmake.tar.gz --strip 1
 
+# Install Boost.
+WORKDIR /usr/local
+RUN mkdir boost
+WORKDIR /usr/local/boost
+RUN wget "https://dl.bintray.com/boostorg/release/1.70.0/source/boost_$(echo $BOOST_VERSION | tr . _)_$BOOST_BUILD.tar.gz" \
+        -O boost.tar.gz
+RUN tar xzf boost.tar.gz --strip 1
+RUN ./bootstrap.sh && ./b2 -j $(nproc) && ./b2 install
+
 # Install libcurl.
 # Requires autoconf, automake, libtool, libssl.
 WORKDIR /usr/local/src
@@ -38,7 +49,7 @@ RUN git submodule update --init
 RUN mkdir build
 WORKDIR /usr/local/src/pistache/build
 RUN cmake -G "Unix Makefiles" -DCMAKE_BUILD_TYPE=Release ..
-RUN make -j4 && make install
+RUN make -j $(nproc) && make install
 
 # Install RapidJSON.
 WORKDIR /usr/local/src
@@ -47,6 +58,6 @@ WORKDIR /usr/local/src/rapidjson
 RUN mkdir build
 WORKDIR /usr/local/src/rapidjson/build
 RUN cmake -DCMAKE_BUILD_TYPE=Release ..
-RUN make -j4 && make install
+RUN make -j $(nproc) && make install
 
 ENV SHELL /bin/bash

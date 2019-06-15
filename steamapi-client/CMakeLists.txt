@@ -1,9 +1,14 @@
+find_package(Boost REQUIRED)
 find_package(CURL REQUIRED COMPONENTS HTTP HTTPS)
 find_package(RapidJSON REQUIRED)
 
 add_library(steamapi-client OBJECT "")
 set_target_properties(steamapi-client PROPERTIES POSITION_INDEPENDENT_CODE ON)
-target_link_libraries(steamapi-client CURL::libcurl RapidJSON::RapidJSON)
+target_link_libraries(steamapi-client
+    Boost::boost
+    CURL::libcurl
+    RapidJSON::RapidJSON
+)
 
 add_library(steamapi-client-shared SHARED $<TARGET_OBJECTS:steamapi-client>)
 add_library(steamapi-client-static STATIC $<TARGET_OBJECTS:steamapi-client>)
