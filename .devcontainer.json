@@ -1,0 +1,11 @@
+{
+	"name": "Dota 2 Hero Picker",
+	"dockerComposeFile": "docker-compose.yml",
+	"service": "dev",
+	"extensions": [
+		"ms-vscode.cpptools",
+		"twxs.cmake",
+		"vector-of-bool.cmake-tools"
+	],
+	"workspaceFolder": "/project"
+}

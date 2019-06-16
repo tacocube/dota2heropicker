@@ -18,6 +18,12 @@ public:
         rapidjson::Document doc = callSteamApi(interface<API>(), method<API>(), version<API>(), parameters);
         return Response<API>(doc);
     }
+    template<class API>
+    Response<API> get(std::uint32_t app_id, Request<API> req) {
+        std::map<std::string, std::string> parameters = req.getParameters();
+        rapidjson::Document doc = callSteamApi(interface<API>(app_id), method<API>(), version<API>(), parameters);
+        return Response<API>(doc);
+    }
 private:
     rapidjson::Document callSteamApi(
         const std::string &interface,

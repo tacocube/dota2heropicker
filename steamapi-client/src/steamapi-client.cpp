@@ -2,6 +2,7 @@
 #include <curl-wrapper.hpp>
 #include <url-encoder.hpp>
 #include <sstream>
+#include <cstdlib>
 
 SteamApiClient::SteamApiClient() : steamApiHost("https://api.steampowered.com") {
 
@@ -15,12 +16,16 @@ rapidjson::Document SteamApiClient::callSteamApi(
 
     CurlWrapper curl;
     UrlEncoder encoder;
+
+    auto parametersPlusKey = parameters;
+    parametersPlusKey["key"] = std::string(std::getenv("STEAMAPIKEY"));
+
     std::stringstream url;
     url << steamApiHost << "/";
     url << interface << "/";
     url << method << "/";
     url << "v" << version << "/";
-    url << "?" << encoder.urlEncodeMap(parameters);
+    url << "?" << encoder.urlEncodeMap(parametersPlusKey);
     curl.setUrl(url.str());
 
     std::stringstream in;
